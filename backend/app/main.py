@@ -384,19 +384,19 @@ async def razorpay_webhook(request: Request, db: Session = Depends(get_db)):
     err_code = str(payment_entity.get("error_code", "PAYMENT_FAILED"))
     err_reason = str(payment_entity.get("error_reason", "")).lower()
 
-    # Map Razorpay error indicators to RecoverIQ failure categories
-    if any(k in err_desc or k in err_reason for k in ["timeout", "gateway_error", "issuer_down", "server_error"]):
-        cat = "soft_decline"
+    # Map Razorpay error indicators to RecoverIQ failure categories (Security first)
+    if any(k in err_desc or k in err_reason for k in ["fraud", "stolen", "lost", "blocked", "blacklisted"]):
+        cat = "hard_decline"
     elif any(k in err_desc or k in err_reason for k in ["otp", "3ds", "authentication", "verification", "pin"]):
         cat = "authentication_failed"
     elif any(k in err_desc or k in err_reason for k in ["insufficient", "balance", "funds"]):
         cat = "insufficient_funds"
-    elif any(k in err_desc or k in err_reason for k in ["fraud", "stolen", "lost", "blocked", "blacklisted"]):
-        cat = "hard_decline"
     elif any(k in err_desc or k in err_reason for k in ["mandate", "recurring", "subscription"]):
         cat = "subscription_failed"
     elif any(k in err_desc or k in err_reason for k in ["cancel", "drop", "abandon"]):
         cat = "checkout_abandoned"
+    elif any(k in err_desc or k in err_reason for k in ["timeout", "gateway_error", "issuer_down", "server_error"]):
+        cat = "soft_decline"
     else:
         cat = "soft_decline"
 
