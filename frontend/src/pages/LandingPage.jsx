@@ -40,11 +40,6 @@ export default function LandingPage() {
 
       {/* ── Hero Section ──────────────────────────────────────── */}
       <section className="hero-section">
-        <div className="hero-badge">
-          <span className="badge-dot animate-pulse"></span>
-          Razorpay AI Builder Internship 2026 • AI Revenue Recovery
-        </div>
-
         <h1 className="hero-heading">
           The LLM proposes; <br />
           <span className="gradient-text">the policy engine disposes.</span>
