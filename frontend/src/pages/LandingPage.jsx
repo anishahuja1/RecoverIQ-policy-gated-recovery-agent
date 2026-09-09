@@ -18,7 +18,7 @@ export default function LandingPage() {
         <div className="nav-brand">
           <div className="nav-logo">⚡</div>
           <span className="nav-title">RecoverIQ</span>
-          <span className="nav-badge">Razorpay AI Track</span>
+          <span className="nav-badge">AI Payment Recovery</span>
         </div>
         <div className="nav-links">
           <a href="#where-to-look" className="nav-item">Evaluation Guide</a>
@@ -107,13 +107,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Where to Look First (Judge Walkthrough) ────────────── */}
+      {/* ── Where to Look First ────────────────────────────────── */}
       <section id="where-to-look" className="section where-to-look-section">
         <div className="section-header">
-          <span className="section-tag">Evaluator Runbook</span>
+          <span className="section-tag">System Tour</span>
           <h2 className="section-title">Where to Look First (3-Minute Tour)</h2>
           <p className="section-subtitle">
-            Three concrete verification steps designed for buildathon judges:
+            Three concrete verification steps to explore the recovery pipeline:
           </p>
         </div>
 
@@ -361,7 +361,7 @@ export default function LandingPage() {
             <span>RecoverIQ</span>
           </div>
           <p className="footer-tagline">
-            Policy-gated AI Revenue Recovery for the Razorpay AI Builder Internship Buildathon (2026).
+            Policy-gated AI revenue recovery engine for modern payment operations.
           </p>
           <div className="footer-links">
             <Link to="/dashboard">Dashboard</Link>
@@ -372,7 +372,7 @@ export default function LandingPage() {
             >
               GitHub Repository
             </a>
-            <a href="#where-to-look">Judge Guide</a>
+            <a href="#where-to-look">Architecture Guide</a>
           </div>
           <div className="footer-bottom">
             <span>© 2026 RecoverIQ. Open source under MIT License.</span>

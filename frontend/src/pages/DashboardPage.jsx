@@ -358,7 +358,7 @@ export default function DashboardPage() {
           <span className="mode-pill">{mode}</span>
         </div>
         <div className="dashboard-topbar-right">
-          <span className="env-tag">RazorpayX Test Mode</span>
+          <span className="env-tag">Payment Sandbox Mode</span>
           <a
             href="https://www.loom.com/share/183f8730da0243639f8ce62120d82244"
             target="_blank"
