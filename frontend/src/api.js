@@ -1,4 +1,4 @@
-﻿/**
+/**
  * RecoverIQ API Client
  * All backend communication is centralized here.
  * Falls back gracefully if backend is unavailable.
@@ -57,3 +57,13 @@ export async function fetchAudioSample() {
   if (!res.ok) throw new Error('Failed to fetch audio sample');
   return res.json();
 }
+
+export async function fetchAuditVerification(paymentId = null) {
+  const url = paymentId
+    ? `${BASE}/api/audit/verify?payment_id=${encodeURIComponent(paymentId)}`
+    : `${BASE}/api/audit/verify`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('Audit verification failed');
+  return res.json();
+}
+
