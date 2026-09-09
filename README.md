@@ -12,7 +12,7 @@ Built for the **Razorpay AI Builder Internship Buildathon** (AI Revenue Recovery
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-18%20%2B%20Vite-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 
-> 📺 **Watch the 3-Minute Walkthrough Video**: [https://www.loom.com/share/183f8730da0243639f8ce62120d82244](https://www.loom.com/share/183f8730da0243639f8ce62120d82244)
+> 🚀 **Live Application**: [https://recover-iq-policy-gated-recovery-ag.vercel.app](https://recover-iq-policy-gated-recovery-ag.vercel.app)
 
 ---
 
