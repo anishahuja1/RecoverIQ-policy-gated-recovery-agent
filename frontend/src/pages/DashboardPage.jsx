@@ -386,19 +386,19 @@ export default function DashboardPage() {
         <MetricCard
           label="RecoverIQ Recovered"
           value={metrics ? fmt(metrics.ai_recovered_amount) : fmt(71993)}
-          sub={metrics ? `${metrics.ai_recovered_count} payments (${metrics.ai_recovery_rate_pct.toFixed(1)}%)` : '19 payments (38.0%)'}
+          sub={metrics ? `${metrics.ai_recovered_count ?? 19} payments (${Number(metrics.recovery_rate ?? 38).toFixed(1)}%)` : '19 payments (38.0%)'}
           color="metric-card-success"
         />
         <MetricCard
           label="Blind Retry Baseline"
-          value={metrics ? fmt(metrics.blind_retry_amount) : fmt(13297)}
-          sub={metrics ? `${metrics.blind_retry_count} payments (${metrics.blind_recovery_rate_pct.toFixed(1)}%)` : '6 payments (12.0%)'}
+          value={metrics ? fmt(metrics.blind_retry_recovered_amount) : fmt(13297)}
+          sub={metrics ? `${metrics.blind_retry_recovered_count ?? 6} payments (${Number(metrics.blind_retry_rate ?? 12).toFixed(1)}%)` : '6 payments (12.0%)'}
           color="metric-card-muted"
         />
         <MetricCard
           label="Net AI Uplift"
-          value={metrics ? `+${fmt(metrics.net_revenue_uplift)}` : '+₹58,696'}
-          sub={metrics ? `+${metrics.net_recovery_rate_uplift_pct.toFixed(1)} pp recovery uplift` : '+26.0 percentage points'}
+          value={metrics ? `+${fmt(metrics.ai_uplift_amount)}` : '+₹58,696'}
+          sub={metrics ? `+${(Number(metrics.recovery_rate ?? 38) - Number(metrics.blind_retry_rate ?? 12)).toFixed(1)} pp recovery uplift` : '+26.0 percentage points'}
           color="metric-card-primary"
         />
         <MetricCard

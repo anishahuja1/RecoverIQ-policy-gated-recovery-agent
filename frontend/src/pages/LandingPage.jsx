@@ -76,14 +76,18 @@ export default function LandingPage() {
           <div className="ticker-item">
             <span className="ticker-label">Proven Recovery Uplift</span>
             <span className="ticker-value">
-              {metrics ? `+${metrics.net_recovery_rate_uplift_pct.toFixed(1)} pp` : '+26.0 pp'}
+              {metrics && metrics.recovery_rate != null && metrics.blind_retry_rate != null
+                ? `+${(metrics.recovery_rate - metrics.blind_retry_rate).toFixed(1)} pp`
+                : '+26.0 pp'}
             </span>
           </div>
           <div className="ticker-divider" />
           <div className="ticker-item">
             <span className="ticker-label">Simulated Revenue Lift</span>
             <span className="ticker-value">
-              {metrics ? `+₹${Math.round(metrics.net_revenue_uplift).toLocaleString('en-IN')}` : '+₹58,696'}
+              {metrics && metrics.ai_uplift_amount != null
+                ? `+₹${Math.round(metrics.ai_uplift_amount).toLocaleString('en-IN')}`
+                : '+₹58,696'}
             </span>
           </div>
           <div className="ticker-divider" />
