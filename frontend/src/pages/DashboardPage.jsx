@@ -359,6 +359,15 @@ export default function DashboardPage() {
         </div>
         <div className="dashboard-topbar-right">
           <span className="env-tag">RazorpayX Test Mode</span>
+          <a
+            href="https://www.loom.com/share/183f8730da0243639f8ce62120d82244"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-secondary"
+            title="Watch 3-minute Loom walkthrough"
+          >
+            📺 Watch Video Demo (3m)
+          </a>
           <button
             className="btn btn-primary"
             onClick={handleRunBatch}

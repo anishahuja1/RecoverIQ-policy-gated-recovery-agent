@@ -22,6 +22,7 @@ export default function LandingPage() {
         </div>
         <div className="nav-links">
           <a href="#where-to-look" className="nav-item">Evaluation Guide</a>
+          <a href="#demo-video" className="nav-item">Video Demo</a>
           <a href="#architecture" className="nav-item">Architecture</a>
           <a href="#security" className="nav-item">Security</a>
           <a
@@ -57,12 +58,20 @@ export default function LandingPage() {
             <span>▶ Launch Live Dashboard</span>
           </Link>
           <a
+            href="https://www.loom.com/share/183f8730da0243639f8ce62120d82244"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-hero-secondary"
+          >
+            📺 Watch Video Demo (3m)
+          </a>
+          <a
             href="https://github.com/anishahuja1/RecoverIQ-policy-gated-recovery-agent"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-hero-secondary"
           >
-            View Source on GitHub
+            GitHub
           </a>
         </div>
 
@@ -307,24 +316,38 @@ export default function LandingPage() {
       </section>
 
       {/* ── Demo Video Section ────────────────────────────────── */}
-      <section className="section video-section">
+      <section id="demo-video" className="section video-section">
         <div className="section-header">
-          <span className="section-tag">Walkthrough</span>
-          <h2 className="section-title">Video Demonstration</h2>
+          <span className="section-tag">Video Walkthrough</span>
+          <h2 className="section-title">See RecoverIQ in Action (3 Minutes)</h2>
           <p className="section-subtitle">
-            See RecoverIQ diagnose payments, enforce policy bounds, and verify audit integrity:
+            A quick walkthrough showing batch payment diagnosis, policy gating, fraud blocking, and cryptographic audit verification:
           </p>
         </div>
 
         <div className="video-player-container">
-          <div className="video-placeholder">
-            <div className="video-play-icon">▶</div>
-            <h3 className="video-placeholder-title">RecoverIQ Evaluator Walkthrough</h3>
-            <p className="video-placeholder-subtitle">
-              Batch Execution • Policy Blocking • Escalation • Hinglish Audio Nudge • Audit Chain Verifier
-            </p>
-            <Link to="/dashboard" className="btn btn-primary" style={{ marginTop: 16 }}>
-              Experience Live Interactive Console →
+          <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: 8, border: '1px solid var(--border)' }}>
+            <iframe
+              src="https://www.loom.com/embed/183f8730da0243639f8ce62120d82244?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
+              frameBorder="0"
+              webkitallowfullscreen="true"
+              mozallowfullscreen="true"
+              allowFullScreen
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              title="RecoverIQ Loom Demo Walkthrough"
+            />
+          </div>
+          <div style={{ marginTop: 20, display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <a
+              href="https://www.loom.com/share/183f8730da0243639f8ce62120d82244"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+            >
+              📺 Open on Loom ↗
+            </a>
+            <Link to="/dashboard" className="btn btn-primary">
+              Launch Interactive Console →
             </Link>
           </div>
         </div>
