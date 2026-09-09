@@ -27,6 +27,8 @@ class AuditEntry(BaseModel):
     event_type: str
     message: str
     metadata: Optional[Any] = None
+    prev_hash: Optional[str] = None
+    event_hash: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -64,6 +66,7 @@ class PaymentOut(BaseModel):
     recovered_amount: float
     blind_retry_recovered: bool
     blind_retry_amount: float
+    provenance: Optional[str] = "SEEDED_DEMO"
 
     class Config:
         from_attributes = True

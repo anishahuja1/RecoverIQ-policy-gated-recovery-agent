@@ -44,6 +44,9 @@ class Payment(Base):
     blind_retry_recovered = Column(Boolean, default=False)
     blind_retry_amount = Column(Float, default=0.0)
 
+    # Security & Provenance
+    provenance = Column(String, default="SEEDED_DEMO")
+
 
 class AuditLog(Base):
     __tablename__ = "audit_logs"
@@ -56,6 +59,8 @@ class AuditLog(Base):
     event_type = Column(String, nullable=False)
     message = Column(Text, nullable=False)
     metadata_ = Column("metadata", JSON, nullable=True)
+    prev_hash = Column(String(64), nullable=True)
+    event_hash = Column(String(64), nullable=True, index=True)
 
 
 class BatchRun(Base):

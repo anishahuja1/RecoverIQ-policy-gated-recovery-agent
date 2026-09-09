@@ -41,29 +41,30 @@ def log(
 
 
 def log_ingestion(db: Session, payment_id: str, amount: float,
-                  failure_category: str, batch_run_id: str) -> None:
+                  failure_category: str, batch_run_id: str,
+                  provenance: str = "SEEDED_DEMO") -> None:
     log(
         db, payment_id,
         actor="system",
         event_type="payment_ingested",
         message=(
-            f"Payment {payment_id} ingested into recovery batch. "
+            f"Payment {payment_id} ingested [provenance: {provenance}]. "
             f"Amount: ₹{amount:,.2f}. Failure category: {failure_category}. "
             "Queued for AI diagnosis."
         ),
         batch_run_id=batch_run_id,
-        metadata={"amount": amount, "failure_category": failure_category},
+        metadata={"amount": amount, "failure_category": failure_category, "provenance": provenance},
     )
 
 
 def log_diagnosis(db: Session, payment_id: str, diagnosis, mode: str,
-                  batch_run_id: str) -> None:
+                  batch_run_id: str, provenance: str = "SEEDED_DEMO") -> None:
     log(
         db, payment_id,
         actor="diagnosis_engine",
         event_type="diagnosis_generated",
         message=(
-            f"{'Cached demo' if mode == 'DEMO_MODE' else 'Live AI'} diagnosis generated: "
+            f"{'Cached demo' if mode == 'DEMO_MODE' else 'Live AI'} diagnosis generated [provenance: {provenance}]: "
             f"{diagnosis.diagnosis}, confidence {diagnosis.confidence:.0%}. "
             f"Reasoning: {diagnosis.reasoning_summary} "
             f"Recommended action: {diagnosis.recommended_action}. "
@@ -76,6 +77,7 @@ def log_diagnosis(db: Session, payment_id: str, diagnosis, mode: str,
             "recommended_action": diagnosis.recommended_action,
             "risk_level": diagnosis.risk_level,
             "mode": mode,
+            "provenance": provenance,
         },
     )
 

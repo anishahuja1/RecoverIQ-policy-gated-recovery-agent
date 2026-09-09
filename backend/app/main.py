@@ -144,8 +144,9 @@ async def run_batch(db: Session = Depends(get_db)):
     mode = "DEMO_MODE" if settings.demo_mode else "LIVE_AI_MODE"
 
     for p in payments:
+        provenance = getattr(p, "provenance", None) or "SEEDED_DEMO"
         # Step 1 — Audit: ingestion
-        log_ingestion(db, p.payment_id, p.amount, p.failure_category, run_id)
+        log_ingestion(db, p.payment_id, p.amount, p.failure_category, run_id, provenance=provenance)
 
         # Step 2 — Diagnosis
         payment_dict = {
@@ -156,14 +157,16 @@ async def run_batch(db: Session = Depends(get_db)):
             "amount": p.amount,
             "payment_method": p.payment_method,
             "attempt_count": p.attempt_count,
+            "customer_name": p.customer_name,
+            "provenance": provenance,
         }
-        diagnosis = await diagnose(p.payment_id, p.failure_category, payment_dict)
+        diagnosis = await diagnose(p.payment_id, p.failure_category, payment_dict, provenance=provenance)
         p.ai_diagnosis = diagnosis.diagnosis
         p.ai_confidence = diagnosis.confidence
         p.ai_reasoning = diagnosis.reasoning_summary
         p.ai_recommended_action = diagnosis.recommended_action
         p.ai_risk_level = diagnosis.risk_level
-        log_diagnosis(db, p.payment_id, diagnosis, mode, run_id)
+        log_diagnosis(db, p.payment_id, diagnosis, mode, run_id, provenance=provenance)
 
         # Step 3 — Policy evaluation
         policy = evaluate_policy(
@@ -411,12 +414,15 @@ async def razorpay_webhook(request: Request, db: Session = Depends(get_db)):
             last_attempt_at=datetime.now(),
             hidden_recovery_outcome="recovered" if cat in {"soft_decline", "insufficient_funds", "checkout_abandoned"} else "not_recovered",
             status="pending",
+            provenance="RAZORPAY_WEBHOOK",
         )
         db.add(existing)
         db.flush()
+    else:
+        existing.provenance = "RAZORPAY_WEBHOOK"
 
     # Ingestion audit
-    log_ingestion(db, existing.payment_id, existing.amount, existing.failure_category, run_id)
+    log_ingestion(db, existing.payment_id, existing.amount, existing.failure_category, run_id, provenance="RAZORPAY_WEBHOOK")
 
     # Diagnosis
     payment_dict = {
@@ -427,14 +433,16 @@ async def razorpay_webhook(request: Request, db: Session = Depends(get_db)):
         "amount": existing.amount,
         "payment_method": existing.payment_method,
         "attempt_count": existing.attempt_count,
+        "customer_name": existing.customer_name,
+        "provenance": "RAZORPAY_WEBHOOK",
     }
-    diagnosis = await diagnose(existing.payment_id, existing.failure_category, payment_dict)
+    diagnosis = await diagnose(existing.payment_id, existing.failure_category, payment_dict, provenance="RAZORPAY_WEBHOOK")
     existing.ai_diagnosis = diagnosis.diagnosis
     existing.ai_confidence = diagnosis.confidence
     existing.ai_reasoning = diagnosis.reasoning_summary
     existing.ai_recommended_action = diagnosis.recommended_action
     existing.ai_risk_level = diagnosis.risk_level
-    log_diagnosis(db, existing.payment_id, diagnosis, "DEMO_MODE", run_id)
+    log_diagnosis(db, existing.payment_id, diagnosis, "DEMO_MODE", run_id, provenance="RAZORPAY_WEBHOOK")
 
     # Policy evaluation
     policy = evaluate_policy(
