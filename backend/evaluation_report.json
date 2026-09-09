@@ -1,0 +1,42 @@
+{
+  "trials": 25,
+  "txns_per_trial": 500,
+  "total_simulated": 12500,
+  "seed": 42,
+  "recoveriq": {
+    "mean_recovery_rate": 32.56,
+    "std_dev": 1.92,
+    "ci_95": [
+      31.81,
+      33.31
+    ],
+    "mean_recovered_gmv": 434488.91,
+    "ci_recovered_gmv": [
+      418155.31,
+      450822.52
+    ]
+  },
+  "blind_retry": {
+    "mean_recovery_rate": 5.5,
+    "std_dev": 1.05,
+    "ci_95": [
+      5.08,
+      5.91
+    ],
+    "mean_recovered_gmv": 83556.33
+  },
+  "uplift": {
+    "mean_percentage_points": 27.06,
+    "std_dev": 1.82,
+    "ci_95": [
+      26.35,
+      27.78
+    ],
+    "extra_recovered_gmv": 350932.59
+  },
+  "safety": {
+    "mean_hard_declines_blocked": 113.4,
+    "mean_high_value_escalated": 1.0,
+    "fraud_protection_rate": "100.0%"
+  }
+}
