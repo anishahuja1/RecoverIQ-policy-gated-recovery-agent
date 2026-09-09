@@ -5,7 +5,7 @@
 Built for the **Razorpay AI Builder Internship Buildathon** (AI Revenue Recovery track).
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000000?style=flat-square&logo=vercel)](https://recoveriq-frontend.vercel.app)
-[![API Status](https://img.shields.io/badge/API-Render-46E3B7?style=flat-square&logo=render)](https://recoveriq-backend.onrender.com/health)
+[![API Status](https://img.shields.io/badge/API-Render-46E3B7?style=flat-square&logo=render)](https://recoveriq-backend-hd28.onrender.com/health)
 [![Walkthrough Video](https://img.shields.io/badge/Demo_Video-Loom-8257E5?style=flat-square&logo=loom)](https://www.loom.com/share/183f8730da0243639f8ce62120d82244)
 [![Tests](https://img.shields.io/badge/pytest-67%20passed-10b981?style=flat-square&logo=pytest)](https://github.com/anishahuja1/RecoverIQ-policy-gated-recovery-agent)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
