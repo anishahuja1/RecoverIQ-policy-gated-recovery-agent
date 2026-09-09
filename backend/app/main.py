@@ -31,6 +31,7 @@ from .recovery import simulate_recovery, simulate_blind_retry
 from .audit import (
     log_ingestion, log_diagnosis, log_policy,
     log_idempotency_key, log_recovery_simulated, log_result, log_blind_retry,
+    verify_audit_chain,
 )
 from .metrics import compute_metrics
 from .config import settings
@@ -291,9 +292,22 @@ def get_audit(payment_id: str, db: Session = Depends(get_db)):
             event_type=e.event_type,
             message=e.message,
             metadata=e.metadata_,
+            prev_hash=e.prev_hash,
+            event_hash=e.event_hash,
         )
         for e in entries
     ]
+
+
+# ── GET /api/audit/verify ─────────────────────────────────────────────────────
+@app.get("/api/audit/verify")
+def verify_audit(payment_id: Optional[str] = Query(None), db: Session = Depends(get_db)):
+    """
+    Cryptographically verify the SHA-256 tamper-evident hash chain.
+    Walks each audit record sequentially, recomputing hashes and validating parent pointers.
+    Returns status, broken entry ID if tampered, and total count verified.
+    """
+    return verify_audit_chain(db, payment_id=payment_id)
 
 
 # ── GET /api/metrics ──────────────────────────────────────────────────────────

@@ -11,9 +11,36 @@ Actors:
   recovery_executor   — action simulation
   baseline_simulator  — blind retry comparison
 """
+import hashlib
+import json
 from datetime import datetime
 from sqlalchemy.orm import Session
 from .models import AuditLog
+
+
+def compute_event_hash(
+    prev_hash: str | None,
+    payment_id: str,
+    actor: str,
+    event_type: str,
+    message: str,
+    timestamp_str: str,
+) -> str:
+    """Computes deterministic SHA-256 hash over canonically serialized audit payload."""
+    prev = prev_hash or "GENESIS"
+    canonical_payload = json.dumps(
+        {
+            "actor": actor,
+            "event_type": event_type,
+            "message": message,
+            "payment_id": payment_id,
+            "timestamp": timestamp_str,
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    raw = f"{prev}||{canonical_payload}"
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
 def log(
@@ -25,19 +52,87 @@ def log(
     batch_run_id: str | None = None,
     metadata: dict | None = None,
 ) -> AuditLog:
-    """Append a single audit entry to the database."""
+    """Append a single cryptographically chained audit entry to the database."""
+    now = datetime.now()
+    now_str = now.isoformat()
+
+    last_log = db.query(AuditLog).order_by(AuditLog.id.desc()).first()
+    prev_hash = last_log.event_hash if (last_log and last_log.event_hash) else "GENESIS"
+    event_hash = compute_event_hash(prev_hash, payment_id, actor, event_type, message, now_str)
+
     entry = AuditLog(
         payment_id=payment_id,
         batch_run_id=batch_run_id,
-        timestamp=datetime.now(),
+        timestamp=now,
         actor=actor,
         event_type=event_type,
         message=message,
         metadata_=metadata or {},
+        prev_hash=prev_hash,
+        event_hash=event_hash,
     )
     db.add(entry)
     db.flush()  # get the id without committing
     return entry
+
+
+def verify_audit_chain(db: Session, payment_id: str | None = None) -> dict:
+    """
+    Traverses and verifies the SHA-256 tamper-evident hash chain.
+    Detects any altered payloads, broken links, inserted, or deleted rows.
+    """
+    query = db.query(AuditLog).order_by(AuditLog.id.asc())
+    if payment_id:
+        query = query.filter(AuditLog.payment_id == payment_id)
+    rows = query.all()
+
+    if not rows:
+        return {
+            "is_valid": True,
+            "total_verified": 0,
+            "broken_at_id": None,
+            "message": "Audit chain is empty.",
+        }
+
+    for i, row in enumerate(rows):
+        expected_hash = compute_event_hash(
+            row.prev_hash,
+            row.payment_id,
+            row.actor,
+            row.event_type,
+            row.message,
+            row.timestamp.isoformat(),
+        )
+        if row.event_hash != expected_hash:
+            return {
+                "is_valid": False,
+                "total_verified": i,
+                "broken_at_id": row.id,
+                "message": (
+                    f"Tampered entry detected at audit log ID {row.id} (payment {row.payment_id}). "
+                    f"Stored hash does not match recomputed hash."
+                ),
+            }
+
+        if payment_id is None and i > 0:
+            prev_row = rows[i - 1]
+            if row.prev_hash != prev_row.event_hash:
+                return {
+                    "is_valid": False,
+                    "total_verified": i,
+                    "broken_at_id": row.id,
+                    "message": (
+                        f"Broken chain link detected at audit log ID {row.id}. "
+                        f"Previous hash does not link to preceding event hash."
+                    ),
+                }
+
+    return {
+        "is_valid": True,
+        "total_verified": len(rows),
+        "broken_at_id": None,
+        "message": f"Cryptographic audit chain intact. Verified {len(rows)} sequential events.",
+    }
 
 
 def log_ingestion(db: Session, payment_id: str, amount: float,
