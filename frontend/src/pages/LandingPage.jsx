@@ -206,71 +206,59 @@ export default function LandingPage() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
-              <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#0284c7" stopOpacity="0.4" />
-              </linearGradient>
-              <linearGradient id="grad-indigo" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#818cf8" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.4" />
-              </linearGradient>
-              <linearGradient id="grad-amber" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fde047" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#d97706" stopOpacity="0.4" />
-              </linearGradient>
               <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                 <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
               </marker>
             </defs>
 
             {/* Ingestion Box */}
-            <rect x="30" y="190" width="180" height="90" rx="8" fill="url(#grad-blue)" stroke="#0284c7" strokeWidth="2" />
-            <text x="120" y="225" fill="#f8fafc" fontSize="13" fontWeight="bold" textAnchor="middle">Razorpay Webhook</text>
-            <text x="120" y="245" fill="#94a3b8" fontSize="11" textAnchor="middle">payment.failed Ingestion</text>
-            <text x="120" y="260" fill="#38bdf8" fontSize="10" textAnchor="middle">Provenance Tagging</text>
+            <rect x="30" y="190" width="180" height="90" rx="8" fill="#f0f9ff" stroke="#0284c7" strokeWidth="1.5" />
+            <text x="120" y="222" fill="#0f172a" fontSize="13" fontWeight="bold" textAnchor="middle">Razorpay Webhook</text>
+            <text x="120" y="242" fill="#475569" fontSize="11" textAnchor="middle">payment.failed Ingestion</text>
+            <text x="120" y="258" fill="#0284c7" fontSize="10" fontWeight="600" textAnchor="middle">Provenance Tagging</text>
 
             {/* Arrow 1 */}
-            <line x1="210" y1="235" x2="260" y2="235" stroke="#64748b" strokeWidth="2" markerEnd="url(#arrow)" />
+            <line x1="210" y1="235" x2="260" y2="235" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrow)" />
 
             {/* AI Diagnosis Engine */}
-            <rect x="260" y="180" width="200" height="110" rx="8" fill="url(#grad-indigo)" stroke="#6366f1" strokeWidth="2" />
-            <text x="360" y="215" fill="#f8fafc" fontSize="13" fontWeight="bold" textAnchor="middle">AI Diagnosis Engine</text>
-            <text x="360" y="235" fill="#c7d2fe" fontSize="10" textAnchor="middle">Prompt Injection Guard</text>
-            <text x="360" y="250" fill="#94a3b8" fontSize="10" textAnchor="middle">XML Tag Delimitation</text>
-            <text x="360" y="268" fill="#818cf8" fontSize="10" textAnchor="middle">6 Categorical Classifiers</text>
+            <rect x="260" y="180" width="200" height="110" rx="8" fill="#f5f3ff" stroke="#6366f1" strokeWidth="1.5" />
+            <text x="360" y="212" fill="#0f172a" fontSize="13" fontWeight="bold" textAnchor="middle">AI Diagnosis Engine</text>
+            <text x="360" y="232" fill="#4f46e5" fontSize="10" fontWeight="600" textAnchor="middle">Prompt Injection Guard</text>
+            <text x="360" y="248" fill="#475569" fontSize="10" textAnchor="middle">XML Tag Delimitation</text>
+            <text x="360" y="266" fill="#6366f1" fontSize="10" textAnchor="middle">6 Categorical Classifiers</text>
 
             {/* Arrow 2 */}
-            <line x1="460" y1="235" x2="510" y2="235" stroke="#64748b" strokeWidth="2" markerEnd="url(#arrow)" />
+            <line x1="460" y1="235" x2="510" y2="235" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrow)" />
 
             {/* Policy Engine Diamond / Block */}
-            <rect x="510" y="165" width="220" height="140" rx="8" fill="url(#grad-amber)" stroke="#f59e0b" strokeWidth="2" />
-            <text x="620" y="200" fill="#fef3c7" fontSize="13" fontWeight="bold" textAnchor="middle">Deterministic Policy Engine</text>
-            <text x="620" y="220" fill="#fde68a" fontSize="10" textAnchor="middle">8 Rules (First Match Wins)</text>
-            <text x="620" y="240" fill="#94a3b8" fontSize="10" textAnchor="middle">1. Already Recovered</text>
-            <text x="620" y="255" fill="#94a3b8" fontSize="10" textAnchor="middle">2. Opt-Out | 3. Hard Decline</text>
-            <text x="620" y="270" fill="#94a3b8" fontSize="10" textAnchor="middle">4. Retries | 5. High Value</text>
-            <text x="620" y="285" fill="#94a3b8" fontSize="10" textAnchor="middle">6. Low Conf | 7. Voice Consent</text>
+            <rect x="510" y="165" width="220" height="140" rx="8" fill="#fffbeb" stroke="#f59e0b" strokeWidth="1.5" />
+            <text x="620" y="196" fill="#0f172a" fontSize="13" fontWeight="bold" textAnchor="middle">Deterministic Policy Engine</text>
+            <text x="620" y="216" fill="#b45309" fontSize="10" fontWeight="700" textAnchor="middle">8 Rules (First Match Wins)</text>
+            <text x="620" y="236" fill="#475569" fontSize="10" textAnchor="middle">1. Already Recovered</text>
+            <text x="620" y="251" fill="#475569" fontSize="10" textAnchor="middle">2. Opt-Out | 3. Hard Decline</text>
+            <text x="620" y="266" fill="#475569" fontSize="10" textAnchor="middle">4. Retries | 5. High Value</text>
+            <text x="620" y="281" fill="#475569" fontSize="10" textAnchor="middle">6. Low Conf | 7. Voice Consent</text>
 
             {/* Decision Outputs */}
             <line x1="730" y1="190" x2="790" y2="120" stroke="#f43f5e" strokeWidth="2" markerEnd="url(#arrow)" />
-            <rect x="790" y="100" width="170" height="40" rx="6" fill="#881337" stroke="#f43f5e" strokeWidth="1.5" />
-            <text x="875" y="125" fill="#ffe4e6" fontSize="11" fontWeight="bold" textAnchor="middle">BLOCK (No Retry)</text>
+            <rect x="790" y="100" width="170" height="40" rx="6" fill="#fff1f2" stroke="#f43f5e" strokeWidth="1.5" />
+            <text x="875" y="125" fill="#9f1239" fontSize="11" fontWeight="bold" textAnchor="middle">BLOCK (No Retry)</text>
 
             <line x1="730" y1="220" x2="790" y2="190" stroke="#8b5cf6" strokeWidth="2" markerEnd="url(#arrow)" />
-            <rect x="790" y="170" width="170" height="40" rx="6" fill="#4c1d95" stroke="#8b5cf6" strokeWidth="1.5" />
-            <text x="875" y="195" fill="#ede9fe" fontSize="11" fontWeight="bold" textAnchor="middle">ESCALATE (Review)</text>
+            <rect x="790" y="170" width="170" height="40" rx="6" fill="#f5f3ff" stroke="#8b5cf6" strokeWidth="1.5" />
+            <text x="875" y="195" fill="#5b21b6" fontSize="11" fontWeight="bold" textAnchor="middle">ESCALATE (Review)</text>
 
             <line x1="730" y1="250" x2="790" y2="260" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arrow)" />
-            <rect x="790" y="240" width="170" height="40" rx="6" fill="#78350f" stroke="#f59e0b" strokeWidth="1.5" />
-            <text x="875" y="265" fill="#fef3c7" fontSize="11" fontWeight="bold" textAnchor="middle">MODIFY (Strip Channel)</text>
+            <rect x="790" y="240" width="170" height="40" rx="6" fill="#fffbeb" stroke="#f59e0b" strokeWidth="1.5" />
+            <text x="875" y="265" fill="#92400e" fontSize="11" fontWeight="bold" textAnchor="middle">MODIFY (Strip Channel)</text>
 
             <line x1="730" y1="280" x2="790" y2="330" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow)" />
-            <rect x="790" y="310" width="170" height="40" rx="6" fill="#064e3b" stroke="#10b981" strokeWidth="1.5" />
-            <text x="875" y="335" fill="#d1fae5" fontSize="11" fontWeight="bold" textAnchor="middle">APPROVE + SHA-256</text>
+            <rect x="790" y="310" width="170" height="40" rx="6" fill="#ecfdf5" stroke="#10b981" strokeWidth="1.5" />
+            <text x="875" y="335" fill="#065f46" fontSize="11" fontWeight="bold" textAnchor="middle">APPROVE + SHA-256</text>
 
             {/* Bottom Immutable Ledger Banner */}
-            <rect x="150" y="410" width="700" height="45" rx="6" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
-            <text x="500" y="437" fill="#cbd5e1" fontSize="11" fontWeight="bold" textAnchor="middle">
+            <rect x="150" y="410" width="700" height="45" rx="6" fill="#ffffff" stroke="#cbd5e1" strokeWidth="1.5" />
+            <text x="500" y="437" fill="#0f172a" fontSize="11" fontWeight="bold" textAnchor="middle">
               🔒 Immutable Cryptographic SHA-256 Audit Trail: prev_hash || canonical_json(event)
             </text>
           </svg>
