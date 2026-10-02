@@ -413,7 +413,7 @@ export default function DashboardPage() {
         <MetricCard
           label="Fraud & High Risk"
           value="13 Blocked"
-          sub="100% fraud protection"
+          sub="13 of 13 flagged blocked"
           color="metric-card-rose"
         />
         <MetricCard
