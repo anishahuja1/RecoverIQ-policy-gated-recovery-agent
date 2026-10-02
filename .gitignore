@@ -1,15 +1,18 @@
 # Python
 __pycache__/
+__pycache__
 *.py[cod]
 *$py.class
 *.egg-info/
 dist/
+dist
 build/
 .eggs/
 venv/
 env/
 .venv/
 .pytest_cache/
+.pytest_cache
 
 # Databases
 *.db
@@ -24,6 +27,7 @@ recoveriq.db
 
 # Node & Frontend
 node_modules/
+node_modules
 frontend/node_modules/
 frontend/dist/
 frontend/.vite/
